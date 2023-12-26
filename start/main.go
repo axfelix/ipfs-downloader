@@ -12,8 +12,8 @@ import (
 
 func main() {
 
-	urlPtr := flag.String("url", "http://nowhere", "URL to download")
-	dirPtr := flag.String("dir", "/no/path", "Destination directory")
+	urlPtr := flag.String("url", "", "URL to download")
+	dirPtr := flag.String("dir", "", "Destination directory")
 	flag.Parse()
 
 	// Create the client object just once per process
@@ -30,12 +30,12 @@ func main() {
 
 	// Start the Workflow
 	url := *urlPtr
-	if url == "http://nowhere" {
-		log.Fatalln("no URL provided", err)
+	if url == "" {
+		log.Fatalln("no URL provided, specify one with --url", err)
 	}
 	dir := *dirPtr
-	if dir == "/no/path" {
-		log.Fatalln("no destination provided", err)
+	if dir == "" {
+		log.Fatalln("no destination provided, specify one with --dir", err)
 	}
 	we, err := c.ExecuteWorkflow(context.Background(), options, app.DownloadWorkflow, url, dir)
 	if err != nil {

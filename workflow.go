@@ -22,7 +22,7 @@ func DownloadWorkflow(ctx workflow.Context, url string, dir string) (string, err
 	ctx = workflow.WithActivityOptions(ctx, options)
 
 	var result string
-	err := workflow.ExecuteActivity(ctx, TryDownload, url).Get(ctx, &result)
+	err := workflow.ExecuteActivity(ctx, TryDownload, url, dir).Get(ctx, &result)
 
 	return result, err
 }

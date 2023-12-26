@@ -14,13 +14,13 @@ func Test_Workflow(t *testing.T) {
 	env := testSuite.NewTestWorkflowEnvironment()
 
 	// Mock activity implementation
-	env.OnActivity(TryDownload, mock.Anything, "https://cloudflare-ipfs.com/ipfs/bafykbzacecdmotlibikawsyygjqrlzz6twacvcsndhhpps52t3hzhoqoaqpzy?filename=Big%20Fiction%3A%20How%20Conglomeration%20Changed%20the%20Publishing%20--%20Dan%20Sinykin%20--%20Literature%20Now%2C%202023%20--%20Columbia%20University%20Press%20--%209780231192941%20--%20387eb49ed942fda6a0ef896a98ecceae%20--%20Anna%E2%80%99s%20Archive.pdf", "~/Desktop").Return("", nil)
+	env.OnActivity(TryDownload, mock.Anything, "https://download.library.lol/main/4154000/387eb49ed942fda6a0ef896a98ecceae/%28Literature%20Now%29%20Dan%20Sinykin%20-%20Big%20Fiction_%20How%20Conglomeration%20Changed%20the%20Publishing%20Industry%20and%20American%20Literature-Columbia%20University%20Press%20%282023%29.pdf", "/tmp").Return("file is 3225167 bytes\n", nil)
 
-	env.ExecuteWorkflow(GreetingWorkflow, "https://cloudflare-ipfs.com/ipfs/bafykbzacecdmotlibikawsyygjqrlzz6twacvcsndhhpps52t3hzhoqoaqpzy?filename=Big%20Fiction%3A%20How%20Conglomeration%20Changed%20the%20Publishing%20--%20Dan%20Sinykin%20--%20Literature%20Now%2C%202023%20--%20Columbia%20University%20Press%20--%209780231192941%20--%20387eb49ed942fda6a0ef896a98ecceae%20--%20Anna%E2%80%99s%20Archive.pdf", "~/Desktop")
+	env.ExecuteWorkflow(DownloadWorkflow, "https://download.library.lol/main/4154000/387eb49ed942fda6a0ef896a98ecceae/%28Literature%20Now%29%20Dan%20Sinykin%20-%20Big%20Fiction_%20How%20Conglomeration%20Changed%20the%20Publishing%20Industry%20and%20American%20Literature-Columbia%20University%20Press%20%282023%29.pdf", "/tmp")
 	require.True(t, env.IsWorkflowCompleted())
 	require.NoError(t, env.GetWorkflowError())
 
 	var size string
 	require.NoError(t, env.GetWorkflowResult(&size))
-	require.Equal(t, "Hello World!", size)
+	require.Equal(t, "file is 3225167 bytes\n", size)
 }

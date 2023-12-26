@@ -21,7 +21,7 @@ func TryDownload(ctx context.Context, url string, dir string) (string, error) {
 	err := requests.URL(url).ToFile(destination).Fetch(ctx)
 
 	if err != nil {
-		log.Fatal(err)
+		return "", err
 	}
 
 	stat, err := os.Stat(destination)
