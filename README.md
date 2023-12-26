@@ -6,13 +6,13 @@ This is a sample Temporal project that can be used to retry downloading flaky IP
 
 Ensure you have Go 1.21 or later installed locally, and a local [Temporal Cluster](https://docs.temporal.io/cli) running.
 
+You should be able to view your local cluster's Temporal Web UI at <http://localhost:8233>.
+
 Clone this repository:
 
 ```bash
 git clone https://github.com/axfelix/ipfs-downloader
 ```
-
-You can now view Temporal Web at <http://localhost:8233>.
 
 Run the worker included in the project:
 
